@@ -105,7 +105,7 @@ Code for extracting connectivity information out of streamlines of white matter.
 [[file:allconnectivity.png]]
 
 #+name: matrices_intro
-#+BEGIN_SRC python :exports none :results none :noweb yes
+#+BEGIN_SRC python :exports code :results none
   
   from dipy.tracking.eudx import EuDX
   from dipy.reconst import peaks, shm
@@ -188,7 +188,7 @@ alongside brain anatomical information, and provide more insights about brain st
 
 [[file:brain_network_example.png]]
 
-#+BEGIN_SRC python :exports none :results none
+#+BEGIN_SRC python :exports code :results none
   '''Example network visualisation using actors from Dipy fvtk models 
   
   
