@@ -176,7 +176,7 @@ Code for extracting connectivity information out of streamlines of white matter.
 
 We can visualize networks in 3D space using graphical tools found in Dipy fvtk module.
 There is potential in networks that come from diffusion imaging, because they can be visualized 
-alongside brain anatomical information, and provide more insights about brain structure. Here, extracted labels coordinates by hand, but it is worth to look for the automatic methods for this task.
+alongside brain anatomical information, and provide more insights about brain structure. Here, I extracted labels coordinates by hand, but it is worth to look for the automatic methods for this task.
 
 
 [[file:brain_network_example.png]]
