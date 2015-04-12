@@ -1,0 +1,251 @@
+#+TITLE: Diffusion imaging and networks
+#+AUTHOR:   Adam Rybinski
+#+EMAIL:    adam.rybinski@outlook.com
+#+DATE: <2015-04-10 pią>
+
+
+
+* Introduction
+  
+
+Presented methods are inspired by examples provided by Dipy project. [[Dipy]] is a free and open-source community-developed tool for analysis of the diffusion imaging data.
+There are dependencies one have to install in order to use provided code. Installation guide can be found at the website of Dipy: http://nipy.org/dipy/installation.html
+
+
+* Methods
+
+
+** Tractography on brain diffusion data
+
+First we have to get to information about the brain white matter. Process of downloading example data from Stanford University is directly embedded in provided Python code.
+
+[[file:streamlines_saggital.png]]
+
+#+name: tractography
+#+BEGIN_SRC python :results none :exports code
+  from dipy.tracking.eudx import EuDX
+  from dipy.reconst import peaks, shm
+  from dipy.tracking import utils
+  
+  from dipy.data import read_stanford_labels, fetch_stanford_t1, read_stanford_t1
+  
+  import numpy as np
+  
+  
+   
+  #part for calculating streamlines from the diffusion data
+  
+  hardi_img, gtab, labels_img = read_stanford_labels()
+  data = hardi_img.get_data()
+  labels = labels_img.get_data()
+  
+  
+  fetch_stanford_t1()
+  t1 = read_stanford_t1()
+  t1_data = t1.get_data()
+  
+  white_matter = (labels == 1) | (labels == 2)
+  csamodel = shm.CsaOdfModel(gtab, 6)
+  csapeaks = peaks.peaks_from_model(model=csamodel,
+                                    data=data,
+                                    sphere=peaks.default_sphere,
+                                    relative_peak_threshold=.8,
+  
+                                    min_separation_angle=45,
+                                    mask=white_matter)
+  
+  seeds = utils.seeds_from_mask(white_matter, density=2)
+  streamline_generator = EuDX(csapeaks.peak_values, csapeaks.peak_indices,
+                              odf_vertices=peaks.default_sphere.vertices,
+                              a_low=.05, step_sz=.5, seeds=seeds)
+  affine = streamline_generator.affine
+  streamlines = list(streamline_generator)
+  
+  # to include only longer streamlines, so we visualize lesser amount of tract, for hardware reasons
+  
+  # part for changing including streamlines only longer than  particular length, here 50
+  
+  from dipy.tracking.metrics import length  
+  
+  longer_streamlines = []
+  for tract in streamlines:
+      if length(tract)>50.0:
+          longer_streamlines.append(tract)
+  
+  
+  # Streamlines visualization
+  
+  from dipy.viz import fvtk
+  from dipy.viz.colormap import line_colors
+  
+  # Make display objects
+  
+  streamlines_actor = fvtk.line(longer_streamlines, line_colors(longer_streamlines))
+  
+  # Add display objects to canvas
+  r = fvtk.ren()
+  fvtk.add(r, streamlines_actor)
+  
+  # Save figure
+  fvtk.camera(r, [-1, 0, 0], [0, 0, 0], viewup=[0, 0, 1])
+  fvtk.record(r, n_frames=1, out_path='streamlines_saggital.png',size=(800, 800))
+  
+  
+#+END_SRC
+
+
+
+
+** Connectivity matrices
+
+Code for extracting connectivity information out of streamlines of white matter. 86 brain regions represented by numbers on x and y axes. More intensive red colors inform us that two regions were connected with more streamlines of white matter.
+
+
+
+[[file:allconnectivity.png]]
+
+#+name: matrices_intro
+#+BEGIN_SRC python :exports none :results none :noweb yes
+  
+  from dipy.tracking.eudx import EuDX
+  from dipy.reconst import peaks, shm
+  from dipy.tracking import utils
+  
+  import numpy as np
+  
+  from dipy.data import read_stanford_labels, fetch_stanford_t1, read_stanford_t1
+  
+  hardi_img, gtab, labels_img = read_stanford_labels()
+  data = hardi_img.get_data()
+  labels = labels_img.get_data()
+  
+  
+  
+  fetch_stanford_t1()
+  t1 = read_stanford_t1()
+  t1_data = t1.get_data()
+  
+  white_matter = (labels == 1) | (labels == 2)
+  csamodel = shm.CsaOdfModel(gtab, 6)
+  csapeaks = peaks.peaks_from_model(model=csamodel,
+                                    data=data,
+                                    sphere=peaks.default_sphere,
+                                    relative_peak_threshold=.8,
+                                    min_separation_angle=45,
+                                    mask=white_matter)
+  
+  seeds = utils.seeds_from_mask(white_matter, density=2)
+  streamline_generator = EuDX(csapeaks.peak_values, csapeaks.peak_indices,
+                              odf_vertices=peaks.default_sphere.vertices,
+                              a_low=.05, step_sz=.5, seeds=seeds)
+  affine = streamline_generator.affine
+  streamlines = list(streamline_generator)
+  
+  
+  M, grouping = utils.connectivity_matrix(streamlines, labels, affine=affine,
+                                          return_mapping=True,
+                                          mapping_as_streamlines=True)
+  M[:3, :] = 0
+  M[:, :3] = 0
+  
+  
+  # Matrix including only 86 gray matter labels
+  
+  labelsConnectivity = M[3:, 3:]
+  
+  #make self-label connection equal 0
+  for i in range(86):
+      labelsConnectivity[i][i] = 0
+  
+   
+  # Visualize matrix
+  
+  import matplotlib.pyplot as plt
+  
+  
+  plt.imshow(np.log1p(M), interpolation='nearest')
+  #plt.show()
+  plt.savefig("allconnectivity.png")
+  
+  
+  np.savetxt('allconnectivityMatrix.txt', labelsConnectivity)
+  
+  
+  
+  
+  
+#+END_SRC
+
+
+
+** 3D brain networks visualizations
+
+
+We can visualize networks in 3D space using graphical tools found in Dipy fvtk module.
+There is potential in networks that come from diffusion imaging, because they can be visualized 
+alongside brain anatomical information, and provide more insights about brain structure. Here, extracted labels coordinates by hand, but it is worth to look for the automatic methods for this task.
+
+
+[[file:brain_network_example.png]]
+
+#+BEGIN_SRC python :exports none :results none
+  '''Example network visualisation using actors from Dipy fvtk models 
+  
+  
+  '''
+  
+  
+  
+  import dipy.viz.fvtk as fvtk
+  import numpy as np
+  
+  
+  
+  label_coords = np.loadtxt('labels_coords_86.txt')
+  
+  
+  
+  labelsConnectivity = np.loadtxt('allconnectivityMatrix.txt')
+  
+  
+  
+  lines_color = [205/255.0,247/255.0,255/255.0]
+  points_color = [2/255.0, 128/255.0, 232/255.0]
+  
+  lines = []
+  for columnNumber in range(86):
+      for rowNumber in range(86):
+          if labelsConnectivity[columnNumber][rowNumber] > 20 :
+              lines.append([label_coords[columnNumber],label_coords[rowNumber]])
+  
+  
+  ren = fvtk.ren()
+  pointActors = fvtk.point(label_coords, points_color, opacity=0.8, point_radius=3)
+  lineActors = fvtk.line(lines, lines_color, opacity=0.2, linewidth=2)
+  
+  
+  fvtk.add(ren, pointActors)
+  
+  fvtk.add(ren, lineActors)
+  
+  
+  #to explore the data in 3D interactive way
+  #fvtk.show(ren)
+  
+  
+  #save figure
+  
+  fvtk.camera(ren, [-1, -1, 0], [0, 0, 0], viewup=[0, 0, 1])
+  fvtk.record(ren, n_frames=1, 
+              out_path='brain_network_example.png',
+              size=(600, 600))
+  
+         
+  
+#+END_SRC
+
+    
+
+
+
+
