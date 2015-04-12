@@ -7,8 +7,6 @@ from dipy.data import read_stanford_labels, fetch_stanford_t1, read_stanford_t1
 
 import numpy as np
 
-
- 
 #part for calculating streamlines from the diffusion data
 
 hardi_img, gtab, labels_img = read_stanford_labels()

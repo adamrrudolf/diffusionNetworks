@@ -58,6 +58,4 @@ import matplotlib.pyplot as plt
 plt.imshow(np.log1p(M), interpolation='nearest')
 #plt.show()
 plt.savefig("allconnectivity.png")
-
-
 np.savetxt('allconnectivityMatrix.txt', labelsConnectivity)

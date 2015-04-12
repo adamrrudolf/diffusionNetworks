@@ -31,8 +31,6 @@ First we have to get to information about the brain white matter. Process of dow
   
   import numpy as np
   
-  
-   
   #part for calculating streamlines from the diffusion data
   
   hardi_img, gtab, labels_img = read_stanford_labels()
@@ -166,13 +164,8 @@ Code for extracting connectivity information out of streamlines of white matter.
   plt.imshow(np.log1p(M), interpolation='nearest')
   #plt.show()
   plt.savefig("allconnectivity.png")
-  
-  
   np.savetxt('allconnectivityMatrix.txt', labelsConnectivity)
-  
-  
-  
-  
+
   
 #+END_SRC
 
@@ -193,9 +186,7 @@ alongside brain anatomical information, and provide more insights about brain st
   
   
   '''
-  
-  
-  
+   
   import dipy.viz.fvtk as fvtk
   import numpy as np
   
@@ -239,9 +230,7 @@ alongside brain anatomical information, and provide more insights about brain st
   fvtk.record(ren, n_frames=1, 
               out_path='brain_network_example.png',
               size=(600, 600))
-  
-         
-  
+   
 #+END_SRC
 
     
