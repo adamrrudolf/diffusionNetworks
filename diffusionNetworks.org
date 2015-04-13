@@ -19,7 +19,7 @@ There are dependencies one have to install in order to use provided code. Instal
 
 First we have to get to information about the brain white matter. Process of downloading example data from Stanford University is directly embedded in provided Python code.
 
-[[file:streamlines_saggital.png]]
+[[file:figures/streamlines_saggital.png]]
 
 #+name: tractography
 #+BEGIN_SRC python :results none :exports code :tangle tractographyExample.py
@@ -100,7 +100,7 @@ Code for extracting connectivity information out of streamlines of white matter.
 
 
 
-[[file:allconnectivity.png]]
+[[file:figures/allconnectivity.png]]
 
 #+name: matrices_intro
 #+BEGIN_SRC python :exports code :results none :tangle matrixExample.py
@@ -179,7 +179,7 @@ There is potential in networks that come from diffusion imaging, because they ca
 alongside brain anatomical information, and provide more insights about brain structure. Here, I extracted labels coordinates by hand, but it is worth to look for the automatic methods for this task.
 
 
-[[file:brain_network_example.png]]
+[[file:figures/brain_network_example.png]]
 
 #+BEGIN_SRC python :exports code :results none :tangle 3DnetworkExample.py
   '''Example network visualisation using actors from Dipy fvtk models 
