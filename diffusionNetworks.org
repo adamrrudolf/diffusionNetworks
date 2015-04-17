@@ -8,7 +8,7 @@
 * Introduction
   
 
-Presented methods are inspired by examples provided by Dipy project. [[Dipy]] is a free and open-source community-developed tool for analysis of the diffusion imaging data.
+Presented methods are inspired by examples provided by Dipy project. [[Dipy]] is a free and open-source community-developed Python tool for analysis of the diffusion imaging data.
 There are dependencies one have to install in order to use provided code. Installation guide can be found at the website of Dipy: http://nipy.org/dipy/installation.html
 
 
@@ -214,7 +214,7 @@ alongside brain anatomical information, and provide more insights about brain st
   
   #to explore the data in 3D interactive way
   #fvtk.show(ren)
-
+  
   #save figure
   
   fvtk.camera(ren, [-1, -1, 0], [0, 0, 0], viewup=[0, 0, 1])
