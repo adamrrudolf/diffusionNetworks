@@ -1,4 +1,4 @@
-#+TITLE: Diffusion imaging and networks
+#+TITLE: Diffusion imaging and brain networks
 #+AUTHOR:   Adam Rybinski
 #+EMAIL:    adam.rybinski@outlook.com
 #+DATE: <2015-04-10 pią>
