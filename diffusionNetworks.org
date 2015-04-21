@@ -11,6 +11,8 @@
 Presented methods are inspired by examples provided by Dipy project. [[http://nipy.org/dipy/][Dipy]] is a free and open-source community-developed Python tool for analysis of the diffusion imaging data.
 There are dependencies one have to install in order to use provided code. Installation guide can be found at the website of Dipy: http://nipy.org/dipy/installation.html
 
+Here is link to my blog that I will continue to develop the more information I'll have to share with others in terms of networks, dMRI, and visualizations: [[http://3dbrainnet.blogspot.com/]]
+
 
 * Methods
 
