@@ -2,6 +2,6 @@ Methods for extracting connectivity information from diffusion data inspired by 
 
 [[https://github.com/arybinski/diffusionNetworks/blob/master/diffusionNetworks.org][diffusionNetworks.org]] file shows the code with figures and description
 
-Here is link to my blog that I will continue to develop the more I'll have to share with others in terms of networks, dMRI, and visualizations: [[http://3dbrainnet.blogspot]]
+Here is link to my blog that I will continue to develop the more I'll have to share with others in terms of networks, dMRI, and visualizations: [[http://3dbrainnet.blogspot.com]]
 
 by Adam Rybinski
