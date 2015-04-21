@@ -98,7 +98,7 @@ First we have to get to information about the brain white matter. Process of dow
 
 ** Connectivity matrices
 
-Code for extracting connectivity information out of streamlines of white matter. 86 brain regions represented by numbers on x and y axes. More intensive red colors inform us that two regions were connected with more streamlines of white matter.
+Code for extracting connectivity information out of streamlines of white matter. 86 brain regions represented by numbers on x and y axes. More intensive red colors inform us that two regions were connected with more streamlines of white matter. You can find information about brain region names behind label numbers in [[https://github.com/arybinski/diffusionNetworks/blob/master/label-info.csv][label-info.csv]].
 
 
 
