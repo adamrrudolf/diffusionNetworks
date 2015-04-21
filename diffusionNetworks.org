@@ -1,14 +1,14 @@
 #+TITLE: Diffusion imaging and brain networks
 #+AUTHOR:   Adam Rybinski
 #+EMAIL:    adam.rybinski@outlook.com
-#+DATE: <2015-04-10 pią>
+
 
 
 
 * Introduction
   
 
-Presented methods are inspired by examples provided by Dipy project. [[Dipy]] is a free and open-source community-developed Python tool for analysis of the diffusion imaging data.
+Presented methods are inspired by examples provided by Dipy project. [[http://nipy.org/dipy/][Dipy]] is a free and open-source community-developed Python tool for analysis of the diffusion imaging data.
 There are dependencies one have to install in order to use provided code. Installation guide can be found at the website of Dipy: http://nipy.org/dipy/installation.html
 
 
