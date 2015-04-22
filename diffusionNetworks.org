@@ -9,7 +9,7 @@
   
 
 Presented methods are inspired by examples provided by Dipy project. [[http://nipy.org/dipy/][Dipy]] is a free and open-source community-developed Python tool for analysis of the diffusion imaging data.
-There are dependencies one have to install in order to use provided code. Installation guide can be found at the website of Dipy: http://nipy.org/dipy/installation.html. You need main libraries and optional python-vtk and matplotlib libraries for visualizations.
+There are dependencies one have to install in order to use provided code. Installation guide can be found at the website of Dipy: http://nipy.org/dipy/installation.html. You need python-vtk and matplotlib libraries for visualizations.
 
 Here is link to my blog that I will continue to develop the more information I'll have to share with others in terms of networks, dMRI, and visualizations: [[http://3dbrainnet.blogspot.com/]]
 
@@ -179,7 +179,6 @@ Code for extracting connectivity information out of streamlines of white matter.
 We can visualize networks in 3D space using graphical tools found in Dipy fvtk module.
 There is potential in networks that come from diffusion imaging, because they can be visualized 
 alongside brain anatomical information, and provide more insights about brain structure. Here, I extracted labels coordinates by hand, but it is worth to look for the automatic methods for this task.
-
 
 [[file:figures/brain_network_example.png]]
 
