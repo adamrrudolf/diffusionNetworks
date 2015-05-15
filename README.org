@@ -1,4 +1,4 @@
-Methods for extracting connectivity information from diffusion data inspired by [[http://nipy.org/dipy/examples_index.html ][examples]] from [[http://nipy.org/dipy/][Dipy]] project.
+Methods for extracting connectivity information from diffusion data inspired by [[http://nipy.org/dipy/documentation.html ][examples]] from [[http://nipy.org/dipy/][Dipy]] project.
 
 [[https://github.com/arybinski/diffusionNetworks/blob/master/diffusionNetworks.org][diffusionNetworks.org]] file shows the code with figures and description
 
